@@ -1,0 +1,67 @@
+document
+  prefix brick <https://brickschema.org/schema/Brick#>
+  prefix csvw <http://www.w3.org/ns/csvw#>
+  prefix dc <http://purl.org/dc/elements/1.1/>
+  prefix dcat <http://www.w3.org/ns/dcat#>
+  prefix dcmitype <http://purl.org/dc/dcmitype/>
+  prefix dcterms <http://purl.org/dc/terms/>
+  prefix dcam <http://purl.org/dc/dcam/>
+  prefix doap <http://usefulinc.com/ns/doap#>
+  prefix foaf <http://xmlns.com/foaf/0.1/>
+  prefix geo <http://www.opengis.net/ont/geosparql#>
+  prefix odrl <http://www.w3.org/ns/odrl/2/>
+  prefix org <http://www.w3.org/ns/org#>
+  prefix prof <http://www.w3.org/ns/dx/prof/>
+  prefix qb <http://purl.org/linked-data/cube#>
+  prefix schema <https://schema.org/>
+  prefix sh <http://www.w3.org/ns/shacl#>
+  prefix skos <http://www.w3.org/2004/02/skos/core#>
+  prefix sosa <http://www.w3.org/ns/sosa/>
+  prefix ssn <http://www.w3.org/ns/ssn/>
+  prefix time <http://www.w3.org/2006/time#>
+  prefix vann <http://purl.org/vocab/vann/>
+  prefix void <http://rdfs.org/ns/void#>
+  prefix wgs <https://www.w3.org/2003/01/geo/wgs84_pos#>
+  prefix owl <http://www.w3.org/2002/07/owl#>
+  prefix rdf <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  prefix rdfs <http://www.w3.org/2000/01/rdf-schema#>
+  prefix xml <http://www.w3.org/XML/1998/namespace>
+  prefix provone <http://purl.dataone.org/provone/2015/01/15/ontology#>
+  prefix tmpl <http://openprovenance.org/tmpl#>
+  prefix var <http://openprovenance.org/var#>
+  prefix ipcc <https://www.ipcc.ch/data/#>
+  
+  bundle var:IPCCChapter7Provenance
+    prefix provone <http://purl.dataone.org/provone/2015/01/15/ontology#>
+    prefix ipcc <https://www.ipcc.ch/data/#>
+    prefix var <http://openprovenance.org/var#>
+    
+    wasAssociatedWith(var:fig7_5_activity, var:user, -)
+    wasAssociatedWith(var:fig7_4_activity, var:SoftwareService, -)
+    wasAssociatedWith(var:fig7_4_activity, var:user, -)
+    wasGeneratedBy(var:figure7_5, var:fig7_5_activity, -)
+    wasDerivedFrom(var:figure7_4, var:Smith2018Data2, -, -, -)
+    wasDerivedFrom(var:figure7_4, var:Smith2018Data1, -, -, -)
+    used(var:fig7_4_activity, var:Smith2018Data2, -)
+    wasDerivedFrom(var:figure7_4, var:Loeb2020Input, -, -, -)
+    used(var:fig7_4_activity, var:Smith2018Data1, -)
+    wasGeneratedBy(var:figure7_4, var:fig7_4_activity, -)
+    used(var:fig7_4_activity, var:Loeb2020Input, -)
+    actedOnBehalfOf(var:SoftwareService, var:user, -)
+    used(var:fig7_5_activity, var:fig7_5_data, -)
+    wasDerivedFrom(var:figure7_5, var:fig7_5_data, -, -, -)
+    wasAssociatedWith(var:fig7_5_activity, var:SoftwareService, -)
+    agent(var:user, [prov:type='prov:Person', dcterms:identifier="https://orcid.org/0000-0000-0000-0000", prov:label="Chapter 7 Author"])
+    agent(var:SoftwareService, [prov:type='prov:SoftwareAgent', prov:location="https://jupyter.org", dcterms:description="Jupyter environment used for figure generation", prov:label="Jupyter Notebook"])
+    entity(var:Loeb2020Input, [dcterms:bibliographicCitation="Loeb et al. 2020", prov:label="Loeb et al. 2020 input dataset", prov:location="./data_input/Loeb_et_al_2020/"])
+    entity(var:Smith2018Data1, [prov:location="./data_input/Smith_et_al_GRL_2018/pdrmip_kernel_ryan_kramer/", dcterms:bibliographicCitation="Smith et al. GRL 2018", prov:label="PDRMIP kernel dataset (Ryan Kramer)"])
+    entity(var:Smith2018Data2, [prov:label="PDRMIP kernel dataset (Gunnar Myhre)", prov:location="./data_input/Smith_et_al_GRL_2018/pdrmip_kernel_ECMWF-Oslo_gunnar_myhre/", dcterms:bibliographicCitation="Smith et al. GRL 2018"])
+    entity(var:fig7_4_code, [prov:type='prov:Plan', prov:label="Code for Figure 7.4", prov:location="https://github.com/IPCC-WG1/Chapter-7/blob/main/notebooks/270_chapter7_fig7.4.ipynb"])
+    entity(var:figure7_4, [prov:type='ipcc:Figure', prov:type='provone:Visualization', prov:location="./figures/figure7.4.png", prov:label="IPCC AR6 WGI Figure 7.4", tmpl:linked="https://github.com/IPCC-WG1/Chapter-7/blob/main/figures/figure7.4.png"])
+    entity(var:fig7_5_data, [prov:label="Table 7.6", prov:location="./data_output/table7.6.csv"])
+    entity(var:fig7_5_code, [prov:type='prov:Plan', prov:location="https://github.com/IPCC-WG1/Chapter-7/blob/main/notebooks/060_chapter7_fig7.5_SPM_fig15.ipynb", prov:label="Code for Figure 7.5"])
+    entity(var:figure7_5, [prov:type='ipcc:Figure', prov:type='provone:Visualization', tmpl:linked="https://github.com/IPCC-WG1/Chapter-7/blob/main/figures/figure7.5.png", prov:label="IPCC AR6 WGI Figure 7.5", prov:location="./figures/figure7.5.png"])
+    activity(var:fig7_4_activity, -, -, [prov:plan='var:fig7_4_code', tmpl:startTime="2025-06-01T12:00:00Z", prov:generated='var:figure7_4', prov:label="Generate Figure 7.4", tmpl:endTime="2025-06-01T12:15:00Z"])
+    activity(var:fig7_5_activity, -, -, [prov:label="Generate Figure 7.5", prov:generated='var:figure7_5', prov:plan='var:fig7_5_code', tmpl:startTime="2025-06-01T13:00:00Z", tmpl:endTime="2025-06-01T13:10:00Z"])
+  endBundle
+endDocument

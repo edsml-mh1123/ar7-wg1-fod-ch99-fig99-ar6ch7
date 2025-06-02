@@ -1,0 +1,87 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix provone: <http://purl.dataone.org/provone/2015/01/15/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tmpl: <http://openprovenance.org/tmpl#> .
+@prefix var: <http://openprovenance.org/var#> .
+@prefix ipcc: <https://www.ipcc.ch/data/#> .
+
+var:IPCCChapter7Provenance {
+
+    ## Agent (Author/User)
+    var:user a prov:Agent, prov:Person ;
+        rdfs:label "Chapter 7 Author" ;
+        dcterms:identifier "https://orcid.org/0000-0000-0000-0000" .
+
+    ## Software agent
+    var:SoftwareService a prov:Agent, prov:SoftwareAgent ;
+        rdfs:label "Jupyter Notebook" ;
+        prov:actedOnBehalfOf var:user ;
+        prov:atLocation "https://jupyter.org" ;
+        dcterms:description "Jupyter environment used for figure generation" .
+
+    ### --- FIGURE 7.4 ---
+
+    ## Input Data
+    var:Loeb2020Input a prov:Entity ;
+        rdfs:label "Loeb et al. 2020 input dataset" ;
+        prov:atLocation "./data_input/Loeb_et_al_2020/" ;
+        dcterms:bibliographicCitation "Loeb et al. 2020" .
+
+    ## Final Data (used directly for plotting)
+    var:Smith2018Data1 a prov:Entity ;
+        rdfs:label "PDRMIP kernel dataset (Ryan Kramer)" ;
+        prov:atLocation "./data_input/Smith_et_al_GRL_2018/pdrmip_kernel_ryan_kramer/" ;
+        dcterms:bibliographicCitation "Smith et al. GRL 2018" .
+
+    var:Smith2018Data2 a prov:Entity ;
+        rdfs:label "PDRMIP kernel dataset (Gunnar Myhre)" ;
+        prov:atLocation "./data_input/Smith_et_al_GRL_2018/pdrmip_kernel_ECMWF-Oslo_gunnar_myhre/" ;
+        dcterms:bibliographicCitation "Smith et al. GRL 2018" .
+
+    var:fig7_4_code a prov:Plan, prov:Entity ;
+        rdfs:label "Code for Figure 7.4" ;
+        prov:atLocation "https://github.com/IPCC-WG1/Chapter-7/blob/main/notebooks/270_chapter7_fig7.4.ipynb" .
+
+    var:fig7_4_activity a prov:Activity ;
+        rdfs:label "Generate Figure 7.4" ;
+        prov:used var:Loeb2020Input, var:Smith2018Data1, var:Smith2018Data2 ;
+        prov:wasAssociatedWith var:user, var:SoftwareService ;
+        prov:hadPlan var:fig7_4_code ;
+        tmpl:startTime "2025-06-01T12:00:00Z" ;
+        tmpl:endTime "2025-06-01T12:15:00Z" ;
+        prov:generated var:figure7_4 .
+
+    var:figure7_4 a provone:Visualization, prov:Entity, ipcc:Figure ;
+        rdfs:label "IPCC AR6 WGI Figure 7.4" ;
+        prov:wasGeneratedBy var:fig7_4_activity ;
+        prov:wasDerivedFrom var:Loeb2020Input, var:Smith2018Data1, var:Smith2018Data2 ;
+        tmpl:linked "https://github.com/IPCC-WG1/Chapter-7/blob/main/figures/figure7.4.png" ;
+        prov:atLocation "./figures/figure7.4.png" .
+
+    ### --- FIGURE 7.5 ---
+
+    var:fig7_5_data a prov:Entity ;
+        rdfs:label "Table 7.6" ;
+        prov:atLocation "./data_output/table7.6.csv" .
+
+    var:fig7_5_code a prov:Plan, prov:Entity ;
+        rdfs:label "Code for Figure 7.5" ;
+        prov:atLocation "https://github.com/IPCC-WG1/Chapter-7/blob/main/notebooks/060_chapter7_fig7.5_SPM_fig15.ipynb" .
+
+    var:fig7_5_activity a prov:Activity ;
+        rdfs:label "Generate Figure 7.5" ;
+        prov:used var:fig7_5_data ;
+        prov:wasAssociatedWith var:user, var:SoftwareService ;
+        prov:hadPlan var:fig7_5_code ;
+        tmpl:startTime "2025-06-01T13:00:00Z" ;
+        tmpl:endTime "2025-06-01T13:10:00Z" ;
+        prov:generated var:figure7_5 .
+
+    var:figure7_5 a provone:Visualization, prov:Entity, ipcc:Figure ;
+        rdfs:label "IPCC AR6 WGI Figure 7.5" ;
+        prov:wasGeneratedBy var:fig7_5_activity ;
+        prov:wasDerivedFrom var:fig7_5_data ;
+        tmpl:linked "https://github.com/IPCC-WG1/Chapter-7/blob/main/figures/figure7.5.png" ;
+        prov:atLocation "./figures/figure7.5.png" .
+}
